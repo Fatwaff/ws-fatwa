@@ -10,6 +10,13 @@ import (
 func Web(page *fiber.App) {
 	page.Post("/api/whatsauth/request", controller.PostWhatsAuthRequest)  //API from user whatsapp message from iteung gowa
 	page.Get("/ws/whatsauth/qr", websocket.New(controller.WsWhatsAuthQR)) //websocket whatsauth
-	page.Get("/", controller.Homepage) //ujicoba panggil package musik
-	page.Get("/presensi", controller.GetPresensi)
+	page.Get("/", controller.Home) 
+	page.Get("/presensi", controller.GetAllPresensi)
+	page.Get("/mahasiswa", controller.GetMahasiswa)
+	page.Get("/kelas", controller.GetKelas)
+	page.Get("/matkul", controller.GetMatkul)
+	page.Post("/ins_presensi", controller.InsertDataPresensi)
+	page.Post("/ins_mahasiswa", controller.InsertDataMahasiswa)
+	page.Post("/ins_kelas", controller.InsertDataKelas)
+	page.Post("/ins_matkul", controller.InsertDataMatkul)
 }

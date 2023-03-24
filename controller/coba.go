@@ -1,11 +1,23 @@
 package controller
 
 import (
+	"net/http"
+
+	inimodel "github.com/Fatwaff/presensi_mahasiswa/model"
+	inimodule "github.com/Fatwaff/presensi_mahasiswa/module"
 	"github.com/Fatwaff/ws-fatwa/config"
 	"github.com/aiteung/musik"
 	cek "github.com/aiteung/presensi"
 	"github.com/gofiber/fiber/v2"
 )
+
+func Home(c *fiber.Ctx) error {
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"github_repo": "https://github.com/Fatwaff/ws-fatwa",
+		"message":     "You are at the root endpoint 😉",
+		"success":     true,
+	})
+}
 
 func Homepage(c *fiber.Ctx) error {
 	ipaddr := musik.GetIPaddress()
@@ -15,4 +27,90 @@ func Homepage(c *fiber.Ctx) error {
 func GetPresensi(c *fiber.Ctx) error {
      ps := cek.GetPresensiCurrentMonth(config.Ulbimongoconn)
      return c.JSON(ps)
+}
+
+func GetAllPresensi(c *fiber.Ctx) error {
+	ps := inimodule.GetAllPresensiFromKehadiran("masuk", config.Ulbimongoconn, "presensi")
+	return c.JSON(ps)
+}
+func GetMahasiswa(c *fiber.Ctx) error {
+	ps := inimodule.GetMahasiswaFromNpm(1214039, config.Ulbimongoconn, "mahasiswa")
+	return c.JSON(ps)
+}
+func GetKelas(c *fiber.Ctx) error {
+	ps := inimodule.GetKelasFromKodeKelas("L3-14", config.Ulbimongoconn, "kelas")
+	return c.JSON(ps)
+}
+func GetMatkul(c *fiber.Ctx) error {
+	ps := inimodule.GetMatkulFromKodeMatkul(21711, config.Ulbimongoconn, "matkul")
+	return c.JSON(ps)
+}
+
+func InsertDataPresensi(c *fiber.Ctx) error {
+	db := config.Ulbimongoconn
+	var presensi inimodel.Presensi
+	if err := c.BodyParser(&presensi); err != nil {
+		return err
+	}
+	insertedID := inimodule.InsertPresensi(db, "presensi",
+		presensi.Kehadiran,
+		presensi.Biodata,
+		presensi.Mata_kuliah)
+	return c.JSON(map[string]interface{}{
+		"status":      http.StatusOK,
+		"message":     "Data berhasil disimpan.",
+		"inserted_id": insertedID,
+	})
+}
+func InsertDataMahasiswa(c *fiber.Ctx) error {
+	db := config.Ulbimongoconn
+	var mahasiswa inimodel.Mahasiswa
+	if err := c.BodyParser(&mahasiswa); err != nil {
+		return err
+	}
+	insertedID := inimodule.InsertMahasiswa(db, "mahasiswa",
+		mahasiswa.Nama,
+		mahasiswa.Npm,
+		mahasiswa.Nama_kelas,
+		mahasiswa.Jurusan)
+	return c.JSON(map[string]interface{}{
+		"status":      http.StatusOK,
+		"message":     "Data berhasil disimpan.",
+		"inserted_id": insertedID,
+	})
+}
+func InsertDataKelas(c *fiber.Ctx) error {
+	db := config.Ulbimongoconn
+	var kelas inimodel.Kelas
+	if err := c.BodyParser(&kelas); err != nil {
+		return err
+	}
+	insertedID := inimodule.InsertKelas(db, "kelas",
+		kelas.Kode_kelas,
+		kelas.Nama_kelas,
+		kelas.Kapasitas)
+	return c.JSON(map[string]interface{}{
+		"status":      http.StatusOK,
+		"message":     "Data berhasil disimpan.",
+		"inserted_id": insertedID,
+	})
+}
+func InsertDataMatkul(c *fiber.Ctx) error {
+	db := config.Ulbimongoconn
+	var matkul inimodel.MataKuliah
+	if err := c.BodyParser(&matkul); err != nil {
+		return err
+	}
+	insertedID := inimodule.InsertMatkul(db, "matkul",
+		matkul.Kode_matkul,
+		matkul.Nama_matkul,
+		matkul.Sks,
+		matkul.Dosen_pengajar,
+		matkul.Jadwal_kuliah,
+		matkul.Ruang_kuliah)
+	return c.JSON(map[string]interface{}{
+		"status":      http.StatusOK,
+		"message":     "Data berhasil disimpan.",
+		"inserted_id": insertedID,
+	})
 }
