@@ -3,7 +3,7 @@ module github.com/Fatwaff/ws-fatwa
 go 1.20
 
 require (
-	github.com/Fatwaff/presensi_mahasiswa v0.0.4
+	github.com/Fatwaff/presensi_mahasiswa v0.0.5
 	github.com/aiteung/atdb v0.0.7
 	github.com/aiteung/musik v0.0.5
 	github.com/aiteung/presensi v0.0.25

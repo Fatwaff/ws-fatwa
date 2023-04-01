@@ -44,6 +44,11 @@ func GetAllPresensi2(c *fiber.Ctx) error {
 	return c.JSON(ps)
 }
 
+func GetSemuaPresensi(c *fiber.Ctx) error {
+	ps := inimodule.GetAllPresensi(config.Ulbimongoconn, "presensi")
+	return c.JSON(ps)
+}
+
 func GetPresensiID(c *fiber.Ctx) error {
 	id := c.Params("id")
 	if id == "" {
