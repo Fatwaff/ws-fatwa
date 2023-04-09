@@ -44,6 +44,30 @@ func GetAllPresensi2(c *fiber.Ctx) error {
 	return c.JSON(ps)
 }
 
+func GetSemuaMahasiswa(c *fiber.Ctx) error {
+	ps := inimodule.GetAllMahasiswa(config.Ulbimongoconn, "mahasiswa")
+	return c.JSON(ps)
+}
+func GetSemuaKelas(c *fiber.Ctx) error {
+	ps := inimodule.GetAllKelas(config.Ulbimongoconn, "kelas")
+	return c.JSON(ps)
+}
+func GetSemuaProdi(c *fiber.Ctx) error {
+	ps := inimodule.GetAllProdi(config.Ulbimongoconn, "prodi")
+	return c.JSON(ps)
+}
+func GetSemuaMataKuliah(c *fiber.Ctx) error {
+	ps := inimodule.GetAllMataKuliah(config.Ulbimongoconn, "matkul")
+	return c.JSON(ps)
+}
+func GetSemuaDosen(c *fiber.Ctx) error {
+	ps := inimodule.GetAllDosen(config.Ulbimongoconn, "dosen")
+	return c.JSON(ps)
+}
+func GetSemuaRuangKuliah(c *fiber.Ctx) error {
+	ps := inimodule.GetAllRuangKuliah(config.Ulbimongoconn, "ruang")
+	return c.JSON(ps)
+}
 func GetSemuaPresensi(c *fiber.Ctx) error {
 	ps := inimodule.GetAllPresensi(config.Ulbimongoconn, "presensi")
 	return c.JSON(ps)
