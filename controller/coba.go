@@ -40,7 +40,7 @@ func GetAllPresensi(c *fiber.Ctx) error {
 }
 
 func GetAllPresensi2(c *fiber.Ctx) error {
-	ps := inimodule.GetAllPresensi(config.Ulbimongoconn2, "presensi")
+	ps := inimodullatihan.GetAllPresensi(config.Ulbimongoconn2, "presensi")
 	return c.JSON(ps)
 }
 
