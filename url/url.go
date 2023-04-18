@@ -22,10 +22,10 @@ func Web(page *fiber.App) {
 	page.Get("/mahasiswa", controller.GetMahasiswa)
 	page.Get("/kelas", controller.GetKelas)
 	page.Get("/matkul", controller.GetMatkul)
-	page.Post("/ins_presensi", controller.InsertDataPresensi)
-	page.Post("/ins_mahasiswa", controller.InsertDataMahasiswa)
-	page.Post("/ins_kelas", controller.InsertDataKelas)
-	page.Post("/ins_matkul", controller.InsertDataMatkul)
+	page.Post("/presensi", controller.InsertDataPresensi)
+	page.Post("/mahasiswa", controller.InsertDataMahasiswa)
+	page.Post("/kelas", controller.InsertDataKelas)
+	page.Post("/matkul", controller.InsertDataMatkul)
 	//
 	page.Get("/presensi2", controller.GetAllPresensi2) //menampilkan seluruh data presensi
 	page.Get("/presensi2/:id", controller.GetPresensiID) //menampilkan data presensi berdasarkan id

@@ -109,7 +109,7 @@ func GetMahasiswa(c *fiber.Ctx) error {
 	return c.JSON(ps)
 }
 func GetKelas(c *fiber.Ctx) error {
-	ps := inimodule.GetKelasFromKodeKelas("L3-14", config.Ulbimongoconn, "kelas")
+	ps := inimodule.GetKelasFromKodeKelas("TI-B2", config.Ulbimongoconn, "kelas")
 	return c.JSON(ps)
 }
 func GetMatkul(c *fiber.Ctx) error {
