@@ -18,6 +18,10 @@ var DBUlbimariainfo = atdb.DBInfo{
 	DBName:   "iyyjrepb0g5pimo4",
 }
 
+var DBTugbesmongoinfo = atdb.DBInfo{
+	DBString: MongoString,
+	DBName:   "db_tugbes",
+}
 var DBUlbimongoinfo = atdb.DBInfo{
 	DBString: MongoString,
 	DBName:   "presensiMahasiswa",
@@ -29,6 +33,8 @@ var DBUlbimongoinfo2 = atdb.DBInfo{
 }
 
 var Ulbimariaconn = atdb.MariaConnect(DBUlbimariainfo)
+
+var Tugbesmongoconn = atdb.MongoConnect(DBTugbesmongoinfo)
 
 var Ulbimongoconn = atdb.MongoConnect(DBUlbimongoinfo)
 

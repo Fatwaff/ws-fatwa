@@ -3,7 +3,8 @@ module github.com/Fatwaff/ws-fatwa
 go 1.20
 
 require (
-	github.com/Fatwaff/presensi_mahasiswa v0.0.7
+	github.com/Fatwaff/be_tugbes v0.0.1
+	github.com/Fatwaff/presensi_mahasiswa v0.0.12
 	github.com/aiteung/atdb v0.0.10
 	github.com/aiteung/musik v0.0.5
 	github.com/aiteung/presensi v0.0.34
@@ -11,7 +12,7 @@ require (
 	github.com/gofiber/websocket/v2 v2.1.5
 	github.com/indrariksa/be_presensi v0.0.8
 	github.com/whatsauth/whatsauth v0.1.89
-	go.mongodb.org/mongo-driver v1.11.3
+	go.mongodb.org/mongo-driver v1.11.4
 )
 
 require (

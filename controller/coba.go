@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
+	modelTugbes "github.com/Fatwaff/be_tugbes/model"
+	moduleTugbes "github.com/Fatwaff/be_tugbes/module"
 	inimodel "github.com/Fatwaff/presensi_mahasiswa/model"
 	inimodule "github.com/Fatwaff/presensi_mahasiswa/module"
 	"github.com/Fatwaff/ws-fatwa/config"
@@ -67,6 +69,11 @@ func GetSemuaDosen(c *fiber.Ctx) error {
 func GetSemuaRuangKuliah(c *fiber.Ctx) error {
 	ps := inimodule.GetAllRuangKuliah(config.Ulbimongoconn, "ruang")
 	return c.JSON(ps)
+}
+func GetSemuaDataRuangan(c *fiber.Ctx) error {
+	var ruang []inimodel.RuangKuliah
+	data := inimodule.GetAllData(config.Ulbimongoconn, "ruang", ruang)
+	return c.JSON(data)
 }
 func GetSemuaPresensi(c *fiber.Ctx) error {
 	ps := inimodule.GetAllPresensi(config.Ulbimongoconn, "presensi")
@@ -184,4 +191,25 @@ func InsertDataMatkul(c *fiber.Ctx) error {
 		"message":     "Data berhasil disimpan.",
 		"inserted_id": insertedID,
 	})
+}
+
+// tugbes
+func InsertUser(c *fiber.Ctx) error {
+	db := config.Tugbesmongoconn
+	var data modelTugbes.User
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+	insertedID := moduleTugbes.InsertOneDoc(db, "user", data)
+	return c.JSON(map[string]interface{}{
+		"status":      http.StatusOK,
+		"message":     "Data berhasil disimpan.",
+		"inserted_id": insertedID,
+	})
+}
+
+func GetAllUser(c *fiber.Ctx) error {
+	var data []modelTugbes.User
+	hasil := inimodule.GetAllData(config.Tugbesmongoconn, "user", data)
+	return c.JSON(hasil)
 }

@@ -18,6 +18,7 @@ func Web(page *fiber.App) {
 	page.Get("/semua-matkul", controller.GetSemuaMataKuliah)
 	page.Get("/semua-dosen", controller.GetSemuaDosen)
 	page.Get("/semua-ruangan", controller.GetSemuaRuangKuliah)
+	page.Get("/semua-test", controller.GetSemuaDataRuangan)
 	page.Get("/presensi", controller.GetAllPresensi)
 	page.Get("/mahasiswa", controller.GetMahasiswa)
 	page.Get("/kelas", controller.GetKelas)
@@ -26,6 +27,9 @@ func Web(page *fiber.App) {
 	page.Post("/mahasiswa", controller.InsertDataMahasiswa)
 	page.Post("/kelas", controller.InsertDataKelas)
 	page.Post("/matkul", controller.InsertDataMatkul)
+	//
+	page.Get("/user", controller.GetAllUser)
+	page.Post("/user", controller.InsertUser)
 	//
 	page.Get("/presensi2", controller.GetAllPresensi2) //menampilkan seluruh data presensi
 	page.Get("/presensi2/:id", controller.GetPresensiID) //menampilkan data presensi berdasarkan id
