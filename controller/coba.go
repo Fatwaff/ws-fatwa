@@ -203,6 +203,12 @@ func InsertUser(c *fiber.Ctx) error {
 			"message": err.Error(),
 		})
 	}
+	if data.FirstName == "" || data.LastName == "" || data.Email == "" || data.Password == "" {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": "Mohon untuk melengkapi data",
+		})
+	}
 	insertedID, err := moduleTugbes.InsertOneDoc(db, "user", data)
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
