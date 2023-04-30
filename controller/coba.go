@@ -198,10 +198,19 @@ func InsertUser(c *fiber.Ctx) error {
 	db := config.Tugbesmongoconn
 	var data modelTugbes.User
 	if err := c.BodyParser(&data); err != nil {
-		return err
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
 	}
-	insertedID := moduleTugbes.InsertOneDoc(db, "user", data)
-	return c.JSON(map[string]interface{}{
+	insertedID, err := moduleTugbes.InsertOneDoc(db, "user", data)
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
+	return c.Status(http.StatusOK).JSON(fiber.Map{
 		"status":      http.StatusOK,
 		"message":     "Data berhasil disimpan.",
 		"inserted_id": insertedID,

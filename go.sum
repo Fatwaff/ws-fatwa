@@ -7,8 +7,8 @@ github.com/Azure/azure-sdk-for-go/sdk/azcore v1.1.2/go.mod h1:uGG2W01BaETf0Ozp+Q
 github.com/Azure/azure-sdk-for-go/sdk/azidentity v1.2.1/go.mod h1:gLa1CL2RNE4s7M3yopJ/p0iq5DdY6Yv5ZUt9MTRZOQM=
 github.com/Azure/azure-sdk-for-go/sdk/internal v1.0.0/go.mod h1:eWRD7oawr1Mu1sLCawqVc0CUiF43ia3qQMxLscsKQ9w=
 github.com/AzureAD/microsoft-authentication-library-for-go v0.8.1/go.mod h1:4qFor3D/HDsvBME35Xy9rwW9DecL+M2sNw1ybjPtwA0=
-github.com/Fatwaff/be_tugbes v0.0.1 h1:wxnJ8ytN6QwYaP+hcBL4bw8lK3uGe1GaxCm50c/YCvc=
-github.com/Fatwaff/be_tugbes v0.0.1/go.mod h1:MU8AvBO6Ic79PE/dTrlGHlTvOBMMGf/BT32xkibCCes=
+github.com/Fatwaff/be_tugbes v0.0.2 h1:f6fkKr00IBr2/AnZhQopIcYVg351YuRx+8Tt0sUYqAI=
+github.com/Fatwaff/be_tugbes v0.0.2/go.mod h1:MU8AvBO6Ic79PE/dTrlGHlTvOBMMGf/BT32xkibCCes=
 github.com/Fatwaff/presensi_mahasiswa v0.0.12 h1:uKEyCSSyIiDTvAdzPveQxXNQFA6U/diDVgXVQorYj44=
 github.com/Fatwaff/presensi_mahasiswa v0.0.12/go.mod h1:04x1eGg46uQksYdOhC306TtVOJkNRSP1porA0BP6up8=
 github.com/aiteung/atapi v0.0.13 h1:ibgOklLJkyAwSpx3iGVcdX96Q92tbxvmIMxMEOjbFNk=
