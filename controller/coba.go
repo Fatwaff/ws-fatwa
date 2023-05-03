@@ -228,3 +228,47 @@ func GetAllUser(c *fiber.Ctx) error {
 	hasil := inimodule.GetAllData(config.Tugbesmongoconn, "user", data)
 	return c.JSON(hasil)
 }
+
+func SignUp(c *fiber.Ctx) error {
+	db := config.Tugbesmongoconn
+	var data modelTugbes.User
+	if err := c.BodyParser(&data); err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
+	_, err := moduleTugbes.SignUp(db, "user", data)
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
+	return c.Status(http.StatusOK).JSON(fiber.Map{
+		"status":      http.StatusOK,
+		"message":     "Akun berhasil disimpan.",
+	})
+}
+
+func LogIn(c *fiber.Ctx) error {
+	db := config.Tugbesmongoconn
+	var data modelTugbes.User
+	if err := c.BodyParser(&data); err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
+	user, err := moduleTugbes.LogIn(db, "user", data)
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
+	return c.Status(http.StatusOK).JSON(fiber.Map{
+		"status":      http.StatusOK,
+		"message":     "Selamat datang " + user,
+	})
+}

@@ -30,6 +30,8 @@ func Web(page *fiber.App) {
 	//
 	page.Get("/user", controller.GetAllUser)
 	page.Post("/user", controller.InsertUser)
+	page.Post("/signup", controller.SignUp)
+	page.Post("/login", controller.LogIn)
 	//
 	page.Get("/presensi2", controller.GetAllPresensi2) //menampilkan seluruh data presensi
 	page.Get("/presensi2/:id", controller.GetPresensiID) //menampilkan data presensi berdasarkan id
