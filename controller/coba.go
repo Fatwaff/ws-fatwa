@@ -13,6 +13,7 @@ import (
 	"github.com/aiteung/musik"
 	cek "github.com/aiteung/presensi"
 	"github.com/gofiber/fiber/v2"
+	inimodellatihan "github.com/indrariksa/be_presensi/model"
 	inimodullatihan "github.com/indrariksa/be_presensi/module"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -31,21 +32,79 @@ func Homepage(c *fiber.Ctx) error {
 	return c.JSON(ipaddr)
 }
 
+// Ulbimongoconn2
 func GetPresensi(c *fiber.Ctx) error {
-     ps := cek.GetPresensiCurrentMonth(config.Ulbimongoconn)
+     ps := cek.GetPresensiCurrentMonth(config.Ulbimongoconn2)
      return c.JSON(ps)
 }
-
-func GetAllPresensi(c *fiber.Ctx) error {
-	ps := inimodule.GetAllPresensiFromKehadiran("masuk", config.Ulbimongoconn, "presensi")
-	return c.JSON(ps)
-}
-
 func GetAllPresensi2(c *fiber.Ctx) error {
 	ps := inimodullatihan.GetAllPresensi(config.Ulbimongoconn2, "presensi")
 	return c.JSON(ps)
 }
+func GetPresensiID(c *fiber.Ctx) error {
+	id := c.Params("id")
+	if id == "" {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": "Wrong parameter",
+		})
+	}
+	objID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
+			"status":  http.StatusBadRequest,
+			"message": "Invalid id parameter",
+		})
+	}
+	ps, err := inimodullatihan.GetPresensiFromID(objID, config.Ulbimongoconn2, "presensi")
+	if err != nil {
+		if errors.Is(err, mongo.ErrNoDocuments) {
+			return c.Status(http.StatusNotFound).JSON(fiber.Map{
+				"status":  http.StatusNotFound,
+				"message": fmt.Sprintf("No data found for id %s", id),
+			})
+		}
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": fmt.Sprintf("Error retrieving data for id %s", id),
+		})
+	}
+	return c.JSON(ps)
+}
+func InsertDataPresensi2(c *fiber.Ctx) error {
+	db := config.Ulbimongoconn2
+	var presensi inimodellatihan.Presensi
+	if err := c.BodyParser(&presensi); err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
+	insertedID, err := inimodullatihan.InsertPresensi(db, "presensi",
+		presensi.Longitude,
+		presensi.Latitude,
+		presensi.Location,
+		presensi.Phone_number,
+		presensi.Checkin,
+		presensi.Biodata)
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
+	return c.Status(http.StatusOK).JSON(fiber.Map{
+		"status":      http.StatusOK,
+		"message":     "Data berhasil disimpan.",
+		"inserted_id": insertedID,
+	})
+}
 
+// Ulbimongoconn
+func GetAllPresensi(c *fiber.Ctx) error {
+	ps := inimodule.GetAllPresensiFromKehadiran("masuk", config.Ulbimongoconn, "presensi")
+	return c.JSON(ps)
+}
 func GetSemuaMahasiswa(c *fiber.Ctx) error {
 	ps := inimodule.GetAllMahasiswa(config.Ulbimongoconn, "mahasiswa")
 	return c.JSON(ps)
@@ -79,38 +138,6 @@ func GetSemuaPresensi(c *fiber.Ctx) error {
 	ps := inimodule.GetAllPresensi(config.Ulbimongoconn, "presensi")
 	return c.JSON(ps)
 }
-
-func GetPresensiID(c *fiber.Ctx) error {
-	id := c.Params("id")
-	if id == "" {
-		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
-			"status":  http.StatusInternalServerError,
-			"message": "Wrong parameter",
-		})
-	}
-	objID, err := primitive.ObjectIDFromHex(id)
-	if err != nil {
-		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
-			"status":  http.StatusBadRequest,
-			"message": "Invalid id parameter",
-		})
-	}
-	ps, err := inimodullatihan.GetPresensiFromID(objID, config.Ulbimongoconn2, "presensi")
-	if err != nil {
-		if errors.Is(err, mongo.ErrNoDocuments) {
-			return c.Status(http.StatusNotFound).JSON(fiber.Map{
-				"status":  http.StatusNotFound,
-				"message": fmt.Sprintf("No data found for id %s", id),
-			})
-		}
-		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
-			"status":  http.StatusInternalServerError,
-			"message": fmt.Sprintf("Error retrieving data for id %s", id),
-		})
-	}
-	return c.JSON(ps)
-}
-
 func GetMahasiswa(c *fiber.Ctx) error {
 	ps := inimodule.GetMahasiswaFromNpm(1214039, config.Ulbimongoconn, "mahasiswa")
 	return c.JSON(ps)
