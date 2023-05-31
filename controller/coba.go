@@ -130,6 +130,18 @@ func InsertDataPresensi2(c *fiber.Ctx) error {
 		"inserted_id": insertedID,
 	})
 }
+// UpdateDataPresensi godoc
+// @Summary Update data presensi.
+// @Description Ubah data presensi.
+// @Tags Presensi
+// @Accept json
+// @Produce json
+// @Param id path string true "Masukan ID"
+// @Param request body Presensi true "Payload Body [RAW]"
+// @Success 200 {object} Presensi
+// @Failure 400
+// @Failure 500
+// @Router /presensi2/{id} [put]
 func UpdateDataPresensi(c *fiber.Ctx) error {
 	db := config.Ulbimongoconn2
 
@@ -175,6 +187,17 @@ func UpdateDataPresensi(c *fiber.Ctx) error {
 		"message": "Data successfully updated",
 	})
 }
+// DeletePresensiByID godoc
+// @Summary Delete data presensi.
+// @Description Hapus data presensi.
+// @Tags Presensi
+// @Accept json
+// @Produce json
+// @Param id path string true "Masukan ID"
+// @Success 200
+// @Failure 400
+// @Failure 500
+// @Router /presensi2/{id} [delete]
 func DeletePresensiByID(c *fiber.Ctx) error {
 	id := c.Params("id")
 	if id == "" {
