@@ -91,6 +91,17 @@ func GetPresensiID(c *fiber.Ctx) error {
 	}
 	return c.JSON(ps)
 }
+// InsertDataPresensi2 godoc
+// @Summary Insert data presensi.
+// @Description Input data presensi.
+// @Tags Presensi
+// @Accept json
+// @Produce json
+// @Param request body Presensi true "Payload Body [RAW]"
+// @Success 200 {object} Presensi
+// @Failure 400
+// @Failure 500
+// @Router /presensi2 [post]
 func InsertDataPresensi2(c *fiber.Ctx) error {
 	db := config.Ulbimongoconn2
 	var presensi inimodellatihan.Presensi
