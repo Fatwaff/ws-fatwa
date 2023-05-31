@@ -37,6 +37,14 @@ func GetPresensi(c *fiber.Ctx) error {
      ps := cek.GetPresensiCurrentMonth(config.Ulbimongoconn2)
      return c.JSON(ps)
 }
+// GetAllPresensi2 godoc
+// @Summary Get All Data Presensi.
+// @Description Mengambil semua data presensi.
+// @Tags Presensi
+// @Accept json
+// @Produce json
+// @Success 200 {object} Presensi
+// @Router /presensi [get]
 func GetAllPresensi2(c *fiber.Ctx) error {
 	ps := inimodullatihan.GetAllPresensi(config.Ulbimongoconn2, "presensi")
 	return c.JSON(ps)
