@@ -4,6 +4,7 @@ import (
 	"github.com/Fatwaff/ws-fatwa/controller"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/swagger"
 	"github.com/gofiber/websocket/v2"
 )
 
@@ -38,4 +39,5 @@ func Web(page *fiber.App) {
 	page.Post("/presensi2", controller.InsertDataPresensi2) //post
 	page.Put("/presensi2/:id", controller.UpdateDataPresensi) //update
 	page.Delete("/presensi2/:id", controller.DeletePresensiByID)//delete
+	page.Get("/docs/*", swagger.HandlerDefault)
 }
