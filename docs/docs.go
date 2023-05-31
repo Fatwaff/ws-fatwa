@@ -20,7 +20,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/presensi": {
+        "/presensi2": {
             "get": {
                 "description": "Mengambil semua data presensi.",
                 "consumes": [
@@ -39,6 +39,47 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/controller.Presensi"
                         }
+                    }
+                }
+            }
+        },
+        "/presensi2/{id}": {
+            "get": {
+                "description": "Ambil per ID data presensi.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Presensi"
+                ],
+                "summary": "Get By ID Data Presensi.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Masukan ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller.Presensi"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
                 }
             }
