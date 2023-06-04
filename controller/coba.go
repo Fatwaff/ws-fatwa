@@ -349,7 +349,7 @@ func InsertDataMatkul(c *fiber.Ctx) error {
 	})
 }
 
-// tugbes
+// tugbes webservice
 func InsertUser(c *fiber.Ctx) error {
 	db := config.Tugbesmongoconn
 	var data modelTugbes.User
@@ -427,4 +427,12 @@ func LogIn(c *fiber.Ctx) error {
 		"status":      http.StatusOK,
 		"message":     "Selamat datang " + user,
 	})
+}
+
+// tugbes litman
+
+func GetAllKamtibmas(c *fiber.Ctx) error {
+	var data []modelTugbes.Kamtibmas
+	hasil := inimodule.GetAllData(config.Tugbesmongoconn, "user", data)
+	return c.JSON(hasil)
 }

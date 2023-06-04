@@ -28,11 +28,13 @@ func Web(page *fiber.App) {
 	page.Post("/mahasiswa", controller.InsertDataMahasiswa)
 	page.Post("/kelas", controller.InsertDataKelas)
 	page.Post("/matkul", controller.InsertDataMatkul)
-	//
+	// tb ws
 	page.Get("/user", controller.GetAllUser)
 	page.Post("/user", controller.InsertUser)
 	page.Post("/signup", controller.SignUp)
 	page.Post("/login", controller.LogIn)
+	// tb ltmn
+	page.Get("/kamtibmas", controller.GetAllKamtibmas)
 	//
 	page.Get("/presensi2", controller.GetAllPresensi2) //menampilkan seluruh data presensi
 	page.Get("/presensi2/:id", controller.GetPresensiID) //menampilkan data presensi berdasarkan id
