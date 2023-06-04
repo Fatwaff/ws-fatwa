@@ -433,6 +433,6 @@ func LogIn(c *fiber.Ctx) error {
 
 func GetAllKamtibmas(c *fiber.Ctx) error {
 	var data []modelTugbes.Kamtibmas
-	hasil := inimodule.GetAllData(config.Tugbesmongoconn, "user", data)
+	hasil := inimodule.GetAllData(config.Tugbesmongoconn, "kamtibmas", data)
 	return c.JSON(hasil)
 }
