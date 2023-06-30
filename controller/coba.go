@@ -450,28 +450,32 @@ func LogIn(c *fiber.Ctx) error {
 	})
 }
 
+type Token struct {
+	TokenString string `json:"tokenstring"`
+}
+
 func Authenticated(c *fiber.Ctx) error {
 	// tokenString := c.Get("Authorization")
 
-	var tokenString string
-	if err := c.BodyParser(&tokenString); err != nil {
+	var token Token
+	if err := c.BodyParser(&token); err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"status":  http.StatusInternalServerError,
 			"message": err.Error(),
 		})
 	}
-
+    tkn := token.TokenString
 	// Check if token exists
-	if tokenString == "" {
+	if tkn == "" {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"message": "Unauthorized",
 		})
 	}
 
 	// Parse token
-	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+	initoken, err := jwt.Parse(tkn, func(initoken *jwt.Token) (interface{}, error) {
 		// Validate the algorithm
-		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+		if _, ok := initoken.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, jwt.ErrSignatureInvalid
 		}
 
@@ -485,7 +489,7 @@ func Authenticated(c *fiber.Ctx) error {
 	}
 
 	// Validate token claims
-	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+	if claims, ok := initoken.Claims.(jwt.MapClaims); ok && initoken.Valid {
 		// c.Locals("username", claims["username"])
 		// return c.Next()
 		return c.Status(http.StatusOK).JSON(fiber.Map{
