@@ -33,6 +33,7 @@ func Web(page *fiber.App) {
 	page.Post("/user", controller.InsertUser)
 	page.Post("/signup", controller.SignUp)
 	page.Post("/login", controller.LogIn)
+	page.Post("/auth", controller.Authenticated)
 	// tb ltmn
 	page.Get("/kamtibmas", controller.GetAllKamtibmas)
 	//
