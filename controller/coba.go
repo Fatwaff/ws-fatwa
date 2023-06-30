@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"time"
 
 	modelTugbes "github.com/Fatwaff/be_tugbes/model"
 	moduleTugbes "github.com/Fatwaff/be_tugbes/module"
@@ -13,6 +14,7 @@ import (
 	"github.com/aiteung/musik"
 	cek "github.com/aiteung/presensi"
 	"github.com/gofiber/fiber/v2"
+	"github.com/golang-jwt/jwt/v4"
 	inimodellatihan "github.com/indrariksa/be_presensi/model"
 	inimodullatihan "github.com/indrariksa/be_presensi/module"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -407,6 +409,8 @@ func SignUp(c *fiber.Ctx) error {
 	})
 }
 
+var jwtSecret = []byte("rahasianih")
+
 func LogIn(c *fiber.Ctx) error {
 	db := config.Tugbesmongoconn
 	var data modelTugbes.User
@@ -416,17 +420,74 @@ func LogIn(c *fiber.Ctx) error {
 			"message": err.Error(),
 		})
 	}
-	user, err := moduleTugbes.LogIn(db, "user", data)
+	email, err := moduleTugbes.LogIn(db, "user", data)
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"status":  http.StatusInternalServerError,
 			"message": err.Error(),
 		})
 	}
+	// Create token
+	token := jwt.New(jwt.SigningMethodHS256)
+
+	// Set claims
+	claims := token.Claims.(jwt.MapClaims)
+	claims["email"] = data.Email
+	claims["exp"] = time.Now().Add(time.Hour * 24).Unix()
+
+	// Generate encoded token
+	tokenString, err := token.SignedString(jwtSecret)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "Failed to generate token",
+		})
+	}
 	return c.Status(http.StatusOK).JSON(fiber.Map{
 		"status":      http.StatusOK,
-		"message":     "Selamat datang " + user,
-		"user":     user,
+		"message":     "Selamat datang " + email,
+		"email":     email,
+		"token": tokenString,
+	})
+}
+
+func Authenticated(c *fiber.Ctx) error {
+	tokenString := c.Get("Authorization")
+
+	// Check if token exists
+	if tokenString == "" {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"message": "Unauthorized",
+		})
+	}
+
+	// Parse token
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		// Validate the algorithm
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, jwt.ErrSignatureInvalid
+		}
+
+		return jwtSecret, nil
+	})
+
+	if err != nil {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"message": "Invalid token",
+		})
+	}
+
+	// Validate token claims
+	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		// c.Locals("username", claims["username"])
+		// return c.Next()
+		return c.Status(http.StatusOK).JSON(fiber.Map{
+		"status":      http.StatusOK,
+		"email":      claims["email"],
+	})
+	}
+
+	return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+		"message": "Invalid token",
 	})
 }
 

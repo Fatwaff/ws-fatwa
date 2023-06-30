@@ -8,8 +8,8 @@ github.com/Azure/azure-sdk-for-go/sdk/azidentity v1.2.1/go.mod h1:gLa1CL2RNE4s7M
 github.com/Azure/azure-sdk-for-go/sdk/internal v1.0.0/go.mod h1:eWRD7oawr1Mu1sLCawqVc0CUiF43ia3qQMxLscsKQ9w=
 github.com/AzureAD/microsoft-authentication-library-for-go v0.8.1/go.mod h1:4qFor3D/HDsvBME35Xy9rwW9DecL+M2sNw1ybjPtwA0=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
-github.com/Fatwaff/be_tugbes v0.0.4 h1:X135f8ezMod4ocq5+aZ0iOH+rUsvFuAISZeh1cqo9/Q=
-github.com/Fatwaff/be_tugbes v0.0.4/go.mod h1:nWg7Kn+qaGgqo5GLC/XSLcsLcmPeFFzoDphBBrkc3hE=
+github.com/Fatwaff/be_tugbes v0.0.6 h1:IQm60Y61N3x+i1LlcdXhVMSMvBx535+BcNwr4YggSiY=
+github.com/Fatwaff/be_tugbes v0.0.6/go.mod h1:nWg7Kn+qaGgqo5GLC/XSLcsLcmPeFFzoDphBBrkc3hE=
 github.com/Fatwaff/presensi_mahasiswa v0.0.12 h1:uKEyCSSyIiDTvAdzPveQxXNQFA6U/diDVgXVQorYj44=
 github.com/Fatwaff/presensi_mahasiswa v0.0.12/go.mod h1:04x1eGg46uQksYdOhC306TtVOJkNRSP1porA0BP6up8=
 github.com/KyleBanks/depth v1.2.1 h1:5h8fQADFrWtarTdtDudMmGsC7GPbOAu6RVB3ffsVFHc=
@@ -65,6 +65,8 @@ github.com/gofiber/swagger v0.1.12/go.mod h1:iOCNEt1gNTtlvCEKoxYX4agnZNtxlAjhujM
 github.com/gofiber/websocket/v2 v2.1.5 h1:2weAMr0Shb2ubhZ3+P4bkeWL+uCZ/NlgjSa1siEcvFM=
 github.com/gofiber/websocket/v2 v2.1.5/go.mod h1:BZZEk+XsjjF0V6/sAw00iGcB69dFb6Hb85ER9gr/xaU=
 github.com/golang-jwt/jwt/v4 v4.4.2/go.mod h1:m21LjoU+eqJr34lmDMbreY2eSTRJ1cv77w39/MY0Ch0=
+github.com/golang-jwt/jwt/v4 v4.5.0 h1:7cYmW1XlMY7h7ii7UhUyChSgS5wUJEnm9uZVTGqOWzg=
+github.com/golang-jwt/jwt/v4 v4.5.0/go.mod h1:m21LjoU+eqJr34lmDMbreY2eSTRJ1cv77w39/MY0Ch0=
 github.com/golang-sql/civil v0.0.0-20190719163853-cb61b32ac6fe/go.mod h1:8vg3r2VgvsThLBIFL93Qb5yWzgyZWhEmBwUJWevAkK0=
 github.com/golang-sql/civil v0.0.0-20220223132316-b832511892a9 h1:au07oEsX2xN0ktxqI+Sida1w446QrXBRJ0nee3SNZlA=
 github.com/golang-sql/civil v0.0.0-20220223132316-b832511892a9/go.mod h1:8vg3r2VgvsThLBIFL93Qb5yWzgyZWhEmBwUJWevAkK0=
