@@ -451,7 +451,15 @@ func LogIn(c *fiber.Ctx) error {
 }
 
 func Authenticated(c *fiber.Ctx) error {
-	tokenString := c.Get("Authorization")
+	// tokenString := c.Get("Authorization")
+
+	var tokenString string
+	if err := c.BodyParser(&tokenString); err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"status":  http.StatusInternalServerError,
+			"message": err.Error(),
+		})
+	}
 
 	// Check if token exists
 	if tokenString == "" {
