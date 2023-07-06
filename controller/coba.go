@@ -413,12 +413,12 @@ var jwtSecret = []byte("rahasianih")
 
 // LogIn godoc
 // @Summary Login.
-// @Description Login User.
+// @Description Login User Admin.
 // @Tags Tugbes Webservice
 // @Accept json
 // @Produce json
-// @Param request body User true "Payload Body [RAW]"
-// @Success 200 {object} User
+// @Param request body Admin true "Payload Body [RAW]"
+// @Success 200 {object} Admin
 // @Failure 400
 // @Failure 500
 // @Router /login [post]
