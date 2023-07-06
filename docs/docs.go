@@ -62,7 +62,7 @@ const docTemplate = `{
         },
         "/login": {
             "post": {
-                "description": "Login User.",
+                "description": "Login User Admin.",
                 "consumes": [
                     "application/json"
                 ],
@@ -80,7 +80,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/controller.User"
+                            "$ref": "#/definitions/controller.Admin"
                         }
                     }
                 ],
@@ -88,7 +88,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/controller.User"
+                            "$ref": "#/definitions/controller.Admin"
                         }
                     },
                     "400": {
@@ -282,6 +282,17 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "controller.Admin": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
         "controller.JamKerja": {
             "type": "object",
             "properties": {
@@ -405,32 +416,6 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "tokenstring": {
-                    "type": "string"
-                }
-            }
-        },
-        "controller.User": {
-            "type": "object",
-            "properties": {
-                "_id": {
-                    "type": "string"
-                },
-                "confirmpass": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "firstname": {
-                    "type": "string"
-                },
-                "lastname": {
-                    "type": "string"
-                },
-                "password": {
-                    "type": "string"
-                },
-                "salt": {
                     "type": "string"
                 }
             }

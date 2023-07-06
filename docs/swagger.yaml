@@ -1,5 +1,12 @@
 basePath: /
 definitions:
+  controller.Admin:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
   controller.JamKerja:
     properties:
       durasi:
@@ -93,23 +100,6 @@ definitions:
       tokenstring:
         type: string
     type: object
-  controller.User:
-    properties:
-      _id:
-        type: string
-      confirmpass:
-        type: string
-      email:
-        type: string
-      firstname:
-        type: string
-      lastname:
-        type: string
-      password:
-        type: string
-      salt:
-        type: string
-    type: object
 host: ws-fatwa.herokuapp.com
 info:
   contact:
@@ -150,21 +140,21 @@ paths:
     post:
       consumes:
       - application/json
-      description: Login User.
+      description: Login User Admin.
       parameters:
       - description: Payload Body [RAW]
         in: body
         name: request
         required: true
         schema:
-          $ref: '#/definitions/controller.User'
+          $ref: '#/definitions/controller.Admin'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/controller.User'
+            $ref: '#/definitions/controller.Admin'
         "400":
           description: Bad Request
         "500":
