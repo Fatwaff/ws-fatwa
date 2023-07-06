@@ -411,6 +411,17 @@ func SignUp(c *fiber.Ctx) error {
 
 var jwtSecret = []byte("rahasianih")
 
+// LogIn godoc
+// @Summary Login.
+// @Description Login User.
+// @Tags Tugbes Webservice
+// @Accept json
+// @Produce json
+// @Param request body User true "Payload Body [RAW]"
+// @Success 200 {object} User
+// @Failure 400
+// @Failure 500
+// @Router /login [post]
 func LogIn(c *fiber.Ctx) error {
 	db := config.Tugbesmongoconn
 	var data modelTugbes.User
@@ -454,6 +465,17 @@ type Token struct {
 	TokenString string `json:"tokenstring"`
 }
 
+// Authenticated godoc
+// @Summary Autentikasi.
+// @Description Autentikasi User.
+// @Tags Tugbes Webservice
+// @Accept json
+// @Produce json
+// @Param request body Token true "Payload Body [RAW]"
+// @Success 200 {object} Token
+// @Failure 400
+// @Failure 500
+// @Router /auth [post]
 func Authenticated(c *fiber.Ctx) error {
 	// tokenString := c.Get("Authorization")
 

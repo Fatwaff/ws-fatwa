@@ -88,6 +88,28 @@ definitions:
         example: "08123456789"
         type: string
     type: object
+  controller.Token:
+    properties:
+      tokenstring:
+        type: string
+    type: object
+  controller.User:
+    properties:
+      _id:
+        type: string
+      confirmpass:
+        type: string
+      email:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+      password:
+        type: string
+      salt:
+        type: string
+    type: object
 host: ws-fatwa.herokuapp.com
 info:
   contact:
@@ -98,6 +120,58 @@ info:
   title: Swagger Example API
   version: "1.0"
 paths:
+  /auth:
+    post:
+      consumes:
+      - application/json
+      description: Autentikasi User.
+      parameters:
+      - description: Payload Body [RAW]
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/controller.Token'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controller.Token'
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Autentikasi.
+      tags:
+      - Tugbes Webservice
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: Login User.
+      parameters:
+      - description: Payload Body [RAW]
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/controller.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controller.User'
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Login.
+      tags:
+      - Tugbes Webservice
   /presensi2:
     get:
       consumes:
