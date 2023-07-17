@@ -461,10 +461,6 @@ func LogIn(c *fiber.Ctx) error {
 	})
 }
 
-type Token struct {
-	TokenString string `json:"tokenstring"`
-}
-
 // Authenticated godoc
 // @Summary Autentikasi.
 // @Description Autentikasi User.
@@ -477,8 +473,6 @@ type Token struct {
 // @Failure 500
 // @Router /auth [post]
 func Authenticated(c *fiber.Ctx) error {
-	// tokenString := c.Get("Authorization")
-
 	var token Token
 	if err := c.BodyParser(&token); err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
