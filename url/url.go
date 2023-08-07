@@ -43,4 +43,7 @@ func Web(page *fiber.App) {
 	page.Put("/presensi2/:id", controller.UpdateDataPresensi) //update
 	page.Delete("/presensi2/:id", controller.DeletePresensiByID)//delete
 	page.Get("/docs/*", swagger.HandlerDefault)
+
+	// bursa-kerja
+	page.Get("/lowongan", controller.GetAllLowongan)
 }

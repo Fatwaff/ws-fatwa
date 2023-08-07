@@ -15,13 +15,19 @@ var MariaStringAkademik string = os.Getenv("MARIASTRINGAKADEMIK")
 
 var DBUlbimariainfo = atdb.DBInfo{
 	DBString: MariaStringAkademik,
-	DBName:   "iyyjrepb0g5pimo4",
+	DBName:   "/iyyjrepb0g5pimo4",
+}
+
+var DBBursaKerjamongoinfo = atdb.DBInfo{
+	DBString: MongoString,
+	DBName:   "db_bursa-kerja",
 }
 
 var DBTugbesmongoinfo = atdb.DBInfo{
 	DBString: MongoString,
 	DBName:   "db_tugbes",
 }
+
 var DBUlbimongoinfo = atdb.DBInfo{
 	DBString: MongoString,
 	DBName:   "presensiMahasiswa",
@@ -33,6 +39,8 @@ var DBUlbimongoinfo2 = atdb.DBInfo{
 }
 
 var Ulbimariaconn = atdb.MariaConnect(DBUlbimariainfo)
+
+var BursaKerjamongoconn = atdb.MongoConnect(DBBursaKerjamongoinfo)
 
 var Tugbesmongoconn = atdb.MongoConnect(DBTugbesmongoinfo)
 
