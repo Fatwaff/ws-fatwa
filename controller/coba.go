@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"time"
 
+	modelBursaKerja "github.com/Fatwaff/be_bursa-kerja/model"
+	moduleBursaKerja "github.com/Fatwaff/be_bursa-kerja/module"
 	modelTugbes "github.com/Fatwaff/be_tugbes/model"
 	moduleTugbes "github.com/Fatwaff/be_tugbes/module"
 	inimodel "github.com/Fatwaff/presensi_mahasiswa/model"
@@ -32,6 +34,12 @@ func Home(c *fiber.Ctx) error {
 func Homepage(c *fiber.Ctx) error {
 	ipaddr := musik.GetIPaddress()
 	return c.JSON(ipaddr)
+}
+
+func GetAllLowongan(c *fiber.Ctx) error {
+	var data []modelBursaKerja.Lowongan
+	hasil := moduleBursaKerja.GetAllDocs(config.BursaKerjamongoconn, "lowongan", data)
+	return c.JSON(hasil)
 }
 
 // Ulbimongoconn2
