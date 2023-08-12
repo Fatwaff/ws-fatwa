@@ -3,7 +3,7 @@ module github.com/Fatwaff/ws-fatwa
 go 1.20
 
 require (
-	github.com/Fatwaff/be_bursa-kerja v0.0.1
+	github.com/Fatwaff/be_bursa-kerja v0.0.2
 	github.com/Fatwaff/be_tugbes v0.0.7
 	github.com/Fatwaff/presensi_mahasiswa v0.0.12
 	github.com/aiteung/atdb v0.0.13

@@ -46,4 +46,5 @@ func Web(page *fiber.App) {
 
 	// bursa-kerja
 	page.Get("/lowongan", controller.GetAllLowongan)
+	page.Get("/lowongan/:id", controller.GetLowonganFromID)
 }

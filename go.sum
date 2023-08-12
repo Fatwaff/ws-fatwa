@@ -8,8 +8,8 @@ github.com/Azure/azure-sdk-for-go/sdk/azidentity v1.2.1/go.mod h1:gLa1CL2RNE4s7M
 github.com/Azure/azure-sdk-for-go/sdk/internal v1.0.0/go.mod h1:eWRD7oawr1Mu1sLCawqVc0CUiF43ia3qQMxLscsKQ9w=
 github.com/AzureAD/microsoft-authentication-library-for-go v0.8.1/go.mod h1:4qFor3D/HDsvBME35Xy9rwW9DecL+M2sNw1ybjPtwA0=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
-github.com/Fatwaff/be_bursa-kerja v0.0.1 h1:4DptLQkCPgAyOAqC53qZqupPlu8nF1yIiTcolkTxuLI=
-github.com/Fatwaff/be_bursa-kerja v0.0.1/go.mod h1:g2dDUIHWr6KxbMJvls+obhH6kTT35d4w7cyzxwCBvv8=
+github.com/Fatwaff/be_bursa-kerja v0.0.2 h1:WLMm9+s3T5EACif2gOLBykch0r/VOf7vLXFVWlR67T8=
+github.com/Fatwaff/be_bursa-kerja v0.0.2/go.mod h1:g2dDUIHWr6KxbMJvls+obhH6kTT35d4w7cyzxwCBvv8=
 github.com/Fatwaff/be_tugbes v0.0.7 h1:x9ijJrJKrSBSBtS6JTV9gth2ysgHG9frxsbDnSRoH8U=
 github.com/Fatwaff/be_tugbes v0.0.7/go.mod h1:nWg7Kn+qaGgqo5GLC/XSLcsLcmPeFFzoDphBBrkc3hE=
 github.com/Fatwaff/presensi_mahasiswa v0.0.12 h1:uKEyCSSyIiDTvAdzPveQxXNQFA6U/diDVgXVQorYj44=
